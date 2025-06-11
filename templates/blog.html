@@ -1,0 +1,319 @@
+{% extends 'layout.html' %}
+
+{% block title %} Blogs {% endblock %}
+
+{% block content %}
+
+
+<div id="preloader"></div>
+
+  <header>
+    <!-- header-area start -->
+    <div id="sticker" class="header-area">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12 col-sm-12">
+
+            <!-- Navigation -->
+            <nav class="navbar navbar-default">
+              <!-- Brand and toggle get grouped for better mobile display -->
+              <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".bs-example-navbar-collapse-1" aria-expanded="false">
+										<span class="sr-only">Toggle navigation</span>
+										<span class="icon-bar"></span>
+										<span class="icon-bar"></span>
+										<span class="icon-bar"></span>
+									</button>
+                <!-- Brand -->
+                <a class="navbar-brand page-scroll sticky-logo" href="index.html">
+                  <h1><span>e</span>Business</h1>
+								</a>
+              </div>
+              <!-- Collect the nav links, forms, and other content for toggling -->
+              <div class="collapse navbar-collapse main-menu bs-example-navbar-collapse-1" id="navbar-example">
+                <ul class="nav navbar-nav navbar-right">
+                  <li class="active">
+                    <a class="page-scroll" href="#home">Home</a>
+                  </li>
+                  <li>
+                    <a class="page-scroll" href="#about">About</a>
+                  </li>
+                  <li>
+                    <a class="page-scroll" href="#services">Services</a>
+                  </li>
+                  <li>
+                    <a class="page-scroll" href="#team">Team</a>
+                  </li>
+                  <li>
+                    <a class="page-scroll" href="#portfolio">Portfolio</a>
+                  </li>
+                  <li>
+                    <a class="page-scroll" href="#blog">Blog</a>
+                  </li>
+                  <li>
+                    <a class="page-scroll" href="#contact">Contact</a>
+                  </li>
+                </ul>
+              </div>
+              <!-- navbar-collapse -->
+            </nav>
+            <!-- END: Navigation -->
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- header-area end -->
+  </header>
+  <!-- header end -->
+
+  <!-- Start Bottom Header -->
+  <div class="header-bg page-area">
+    <div class="home-overly"></div>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+          <div class="slider-content text-center">
+            <div class="header-bottom">
+              <div class="layer2 wow zoomIn" data-wow-duration="1s" data-wow-delay=".4s">
+                <h1 class="title2">My Blog</h1>
+              </div>
+              <div class="layer3 wow zoomInUp" data-wow-duration="2s" data-wow-delay="1s">
+                <h2 class="title3">Profesional Blog Page</h2>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- END Header -->
+  <div class="blog-page area-padding">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+          <div class="page-head-blog">
+            <div class="single-blog-page">
+              <!-- search option start -->
+              <form >
+                <div class="search-option">
+                  <input type="text" placeholder="Search..." name ="search">
+                  <button class="button" type="submit">
+                                            <i class="fa fa-search"></i>
+                                        </button>
+                </div>
+              </form>
+              <!-- search option end -->
+            </div>
+            <div class="single-blog-page">
+              <!-- recent start -->
+              <div class="left-blog">
+                <h4>recent post</h4>
+                <div class="recent-post">
+                  <!-- start single post -->
+                   {% for post in recent_posts %}
+                  <div class="recent-single-post">
+                    <div class="post-img">
+                      <a href="#">
+												   <img src="{{ post.image.url }}" alt="{{ post.title }}">
+												</a>
+                    </div>
+                    <div class="pst-content">
+                      <p><a href="#"> {{ post.title }}</a></p>
+                    </div>
+                  </div>
+                  {% endfor %}
+                  <!-- End single post -->
+                  <!-- start single post -->
+                  <!-- End single post -->
+                </div>
+              </div>
+              <!-- recent end -->
+            </div>
+            <div class="single-blog-page">
+              <div class="left-blog">
+                <h4>categories</h4>
+                <ul>
+                  {% for category in blogcategories %}
+                  <li>
+                    <a href="#">{{ category.name }}</a>
+                  </li>
+                  {% endfor %}
+                </ul>
+              </div>
+            </div>
+            <div class="single-blog-page">
+              <div class="left-blog">
+                <h4>archive</h4>
+                <ul>
+                  {% for post in recent_posts %}
+                  <li>
+                    <a href="#">{{post.created_at}}</a>
+                  </li>
+                  {% endfor %}
+                </ul>
+              </div>
+            </div>
+            <div class="single-blog-page">
+              <div class="left-tags blog-tags">
+                <div class="popular-tag left-side-tags left-blog">
+                  <h4>popular tags</h4>
+                  <ul>
+                    {% for tag in blogtags %}
+                    <li>
+                      <a href="#">{{ tag.name }}</a>
+                    </li>
+                    {% endfor %}
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- End left sidebar -->
+        <!-- Start single blog -->
+        <div class="col-md-8 col-sm-8 col-xs-12">
+          <div class="row">
+            {% for blog in page_obj %}
+            <div class="col-md-12 col-sm-12 col-xs-12">
+              <div class="single-blog">
+                <div class="single-blog-img">
+                  <a href="blog-details.html">
+											<img src="{{ blog.image.url }}" alt="blog">
+										</a>
+                </div>
+                <div class="blog-meta">
+                  <span class="comments-type">
+											<i class="fa fa-comment-o"></i>
+											<a href="#">{{total_comment}}</a>
+										</span>
+                  <span class="date-type">
+											<i class="fa fa-calendar"></i>{{ blog.created_at}}
+										</span>
+                </div>
+                <div class="blog-text">
+                  <h4>
+											<a href="#">{{ blog.title }}</a>
+										</h4>
+                  <p>
+                    {{ blog.short_content }}
+                  </p>
+                </div>
+                <span>
+										<a href="{% url 'blog-detail' blog.id %}" class="ready-btn">Read more</a>
+									</span>
+              </div>
+            </div>
+            {% endfor %}
+            <!-- End single blog -->
+            <!-- End single blog -->
+            <div class="blog-pagination">
+              <ul class="pagination">
+                {% if page_obj.has_previous %}
+                <li><a href="?page={{ page_obj.previous_page_number }}">&lt;</a></li>
+                <li><a href="?page={{ page_obj.previous_page_number }}">{{ page_obj.previous_page_number }}</a></li>
+                {% endif %}
+                <li class="active"><a href="?page={{ page_obj.number }}">{{ page_obj.number }}</a></li>
+                <!-- <li><a href="#">2</a></li> -->
+                {% if page_obj.has_next %}
+                <li><a href="?page={{ page_obj.next_page_number }}">{{ page_obj.next_page_number }}</a></li>
+                <li><a href="?page={{ page_obj.next_page_number }}">&gt;</a></li>
+                {% endif %}
+              </ul>
+            </div>
+          </div>
+        </div>
+      </dv>
+    </div>
+  </div>
+  <!-- End Blog Area -->
+
+  <div class="clearfix"></div>
+
+  <!-- Start Footer bottom Area -->
+  <footer>
+    <div class="footer-area">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-4 col-sm-4 col-xs-12">
+            <div class="footer-content">
+              <div class="footer-head">
+                <div class="footer-logo">
+                  <h2><span>e</span>Business</h2>
+                </div>
+
+                <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis.</p>
+                <div class="footer-icons">
+                  <ul>
+                    <li>
+                      <a href="#"><i class="fa fa-facebook"></i></a>
+                    </li>
+                    <li>
+                      <a href="#"><i class="fa fa-twitter"></i></a>
+                    </li>
+                    <li>
+                      <a href="#"><i class="fa fa-google"></i></a>
+                    </li>
+                    <li>
+                      <a href="#"><i class="fa fa-pinterest"></i></a>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- end single footer -->
+          <div class="col-md-4 col-sm-4 col-xs-12">
+            <div class="footer-content">
+              <div class="footer-head">
+                <h4>information</h4>
+                <p>
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.
+                </p>
+                <div class="footer-contacts">
+                  <p><span>Tel:</span> +123 456 789</p>
+                  <p><span>Email:</span> contact@example.com</p>
+                  <p><span>Working Hours:</span> 9am-5pm</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- end single footer -->
+          <div class="col-md-4 col-sm-4 col-xs-12">
+            <div class="footer-content">
+              <div class="footer-head">
+                <h4>Instagram</h4>
+                <div class="flicker-img">
+                  <a href="#"><img src="img/portfolio/1.jpg" alt=""></a>
+                  <a href="#"><img src="img/portfolio/2.jpg" alt=""></a>
+                  <a href="#"><img src="img/portfolio/3.jpg" alt=""></a>
+                  <a href="#"><img src="img/portfolio/4.jpg" alt=""></a>
+                  <a href="#"><img src="img/portfolio/5.jpg" alt=""></a>
+                  <a href="#"><img src="img/portfolio/6.jpg" alt=""></a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="footer-area-bottom">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="copyright text-center">
+              <p>
+                &copy; Copyright <strong>eBusiness</strong>. All Rights Reserved
+              </p>
+            </div>
+            <div class="credits">
+              Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <a href="#" class="back-to-top"><i class="fa fa-chevron-up"></i></a>
+
+{% endblock %}

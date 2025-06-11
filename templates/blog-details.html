@@ -1,0 +1,393 @@
+{% extends 'layout.html' %}
+
+{% block title %} {{ blog.title }} {% endblock %}
+
+{% block content %}
+
+{% load static %}
+
+
+  <div id="preloader"></div>
+
+  <header>
+    <!-- header-area start -->
+    <div id="sticker" class="header-area">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12 col-sm-12">
+
+            <!-- Navigation -->
+            <nav class="navbar navbar-default">
+              <!-- Brand and toggle get grouped for better mobile display -->
+              <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".bs-example-navbar-collapse-1" aria-expanded="false">
+										<span class="sr-only">Toggle navigation</span>
+										<span class="icon-bar"></span>
+										<span class="icon-bar"></span>
+										<span class="icon-bar"></span>
+									</button>
+                <!-- Brand -->
+                <a class="navbar-brand page-scroll sticky-logo" href="index.html">
+                  <h1><span>e</span>Business</h1>
+                  <!-- Uncomment below if you prefer to use an image logo -->
+                  <!-- <img src="img/logo.png" alt="" title=""> -->
+								</a>
+              </div>
+              <!-- Collect the nav links, forms, and other content for toggling -->
+              <div class="collapse navbar-collapse main-menu bs-example-navbar-collapse-1" id="navbar-example">
+                <ul class="nav navbar-nav navbar-right">
+                  <li class="active">
+                    <a class="page-scroll" href="#home">Home</a>
+                  </li>
+                  <li>
+                    <a class="page-scroll" href="#about">About</a>
+                  </li>
+                  <li>
+                    <a class="page-scroll" href="#services">Services</a>
+                  </li>
+                  <li>
+                    <a class="page-scroll" href="#team">Team</a>
+                  </li>
+                  <li>
+                    <a class="page-scroll" href="#portfolio">Portfolio</a>
+                  </li>
+                  <li>
+                    <a class="page-scroll" href="#blog">Blog</a>
+                  </li>
+                  <li>
+                    <a class="page-scroll" href="#contact">Contact</a>
+                  </li>
+                </ul>
+              </div>
+              <!-- navbar-collapse -->
+            </nav>
+            <!-- END: Navigation -->
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- header-area end -->
+  </header>
+  <!-- header end -->
+
+  <!-- Start Bottom Header -->
+  <div class="header-bg page-area">
+    <div class="home-overly"></div>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+          <div class="slider-content text-center">
+            <div class="header-bottom">
+              <div class="layer2 wow zoomIn" data-wow-duration="1s" data-wow-delay=".4s">
+                <h1 class="title2">{{ blog.title }} </h1>
+              </div>
+              <div class="layer3 wow zoomInUp" data-wow-duration="2s" data-wow-delay="1s">
+                <h2 class="title3">{{ blog.author }}</h2>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- END Header -->
+  <div class="blog-page area-padding">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+          <div class="page-head-blog">
+            <div class="single-blog-page">
+              <!-- search option start -->
+              <form action="#">
+                <div class="search-option">
+                  <input type="text" placeholder="Search...">
+                  <button class="button" type="submit">
+                                            <i class="fa fa-search"></i>
+                                        </button>
+                </div>
+              </form>
+              <!-- search option end -->
+            </div>
+            <div class="single-blog-page">
+              <!-- recent start -->
+              <div class="left-blog">
+                <h4>recent post</h4>
+                <div class="recent-post">
+                  <!-- start single post -->
+                  {% for post in recent_posts %}
+                  <div class="recent-single-post">
+                    <div class="post-img">
+                      <a href="#">
+												   <img src="{{ post.image.url }}" alt="{{ post.title }}">
+												</a>
+                    </div>
+                    <div class="pst-content">
+                      <p><a href="#"> {{ post.title }}</a></p>
+                    </div>
+                  </div>
+                  {% endfor %}
+                  <!-- End single post -->
+                  <!-- start single post -->
+                  <!-- End single post -->
+                </div>
+              </div>
+              <!-- recent end -->
+            </div>
+            <div class="single-blog-page">
+              <div class="left-blog">
+                <h4>categories</h4>
+                <ul>
+                  {% for category in blogcategories %}
+                  <li>
+                    <a href="#">{{ category.name }}</a>
+                  </li>
+                  {% endfor %}
+                </ul>
+              </div>
+            </div>
+            <div class="single-blog-page">
+              <div class="left-blog">
+                <h4>archive</h4>
+                <ul>
+                  {% for blog in blogs %}
+                  <li>
+                    <a href="#">{{blog.created_at}}</a>
+                  </li>
+                  {% endfor %}
+                </ul>
+              </div>
+            </div>
+            <div class="single-blog-page">
+              <div class="left-tags blog-tags">
+                <div class="popular-tag left-side-tags left-blog">
+                  <h4>popular tags</h4>
+                  <ul>
+                    {% for tag in blogtags %}
+                    <li>
+                      <a href="#">{{ tag.name }}</a>
+                    </li>
+                    {% endfor %}
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- End left sidebar -->
+        <!-- Start single blog -->
+        <div class="col-md-8 col-sm-8 col-xs-12">
+          <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+              <!-- single-blog start -->
+              <article class="blog-post-wrapper">
+                <div class="post-thumbnail">
+                  <img src="{{ blog.image.url }}" alt="" />
+                </div>
+                <div class="post-information">
+                  <h2>{{ blog.title }}</h2>
+                  <div class="entry-meta">
+                    <span class="author-meta"><i class="fa fa-user"></i> <a href="#">{{ blog.author }}</a></span>
+                    <span><i class="fa fa-clock-o"></i> {{ blog.created_at}}</span>
+                    <span class="tag-meta">
+												<i class="fa fa-folder-o"></i>
+                        {% for category in blog.categories.all %}
+												<a href="#">{{ category.name }}</a>{% if forloop.counter != countc %}, {% endif %}
+                        {% endfor %}
+												<!-- <a href="#">work</a> -->
+											</span>
+                    <span>
+												<i class="fa fa-tags"></i>
+                        {% for tag in blog.tags.all %}
+												<a href="#">{{ tag.name }}</a>{% if forloop.counter != countt %}, {% endif %}
+                        {% endfor %}
+												<!-- <a href="#"> Humer</a>,
+												<a href="#">House</a> -->
+											</span>
+                    <span><i class="fa fa-comments-o"></i> <a href="#">{{ blog.comments.all | length }} comments</a></span>
+                  </div>
+                  <div class="entry-content">
+                    <p>Aliquam et metus pharetra, bibendum massa nec, fermentum odio. Nunc id leo ultrices, mollis ligula in, finibus tortor. Mauris eu dui ut lectus fermentum eleifend. Pellentesque faucibus sem ante, non malesuada odio varius nec. Suspendisse
+                      potenti. Proin consectetur aliquam odio nec fringilla. Sed interdum at justo in efficitur. Vivamus gravida volutpat sodales. Fusce ornare sit amet ligula condimentum sagittis.</p>
+                    <blockquote>
+                      <p>Quisque semper nunc vitae erat pellentesque, ac placerat arcu consectetur. In venenatis elit ac ultrices convallis. Duis est nisi, tincidunt ac urna sed, cursus blandit lectus. In ullamcorper sit amet ligula ut eleifend. Proin dictum
+                        tempor ligula, ac feugiat metus. Sed finibus tortor eu scelerisque scelerisque.</p>
+                    </blockquote>
+                    <p>Aenean et tempor eros, vitae sollicitudin velit. Etiam varius enim nec quam tempor, sed efficitur ex ultrices. Phasellus pretium est vel dui vestibulum condimentum. Aenean nec suscipit nibh. Phasellus nec lacus id arcu facilisis elementum.
+                      Curabitur lobortis, elit ut elementum congue, erat ex bibendum odio, nec iaculis lacus sem non lorem. Duis suscipit metus ante, sed convallis quam posuere quis. Ut tincidunt eleifend odio, ac fringilla mi vehicula nec. Nunc vitae
+                      lacus eget lectus imperdiet tempus sed in dui. Nam molestie magna at risus consectetur, placerat suscipit justo dignissim. Sed vitae fringilla enim, nec ullamcorper arcu.</p>
+                  </div>
+                </div>
+              </article>
+              <div class="clear"></div>
+              <div class="single-post-comments">
+                <div class="comments-area">
+                  <div class="comments-heading">
+                    <h3>{{ blog.comments.all | length }} comments</h3>
+                  </div>
+                  <div class="comments-list">
+                    <ul>
+                      {% for comment in comments %}
+                      {% if not comment.parent %}
+                      <li class="threaded-comments">
+                        <div class="comments-details">
+                          <div class="comments-list-img">
+                            <img src="{% static 'img/blog/b02.jpg' %}" alt="post-author">
+                          </div>
+                          <div class="comments-content-wrap">
+                            <span>
+																<b><a href="#">{{ comment.name }}</a></b>
+																<span class="post-time">{{ comment.created_at }}</span>
+                            <button type="button" id="{{comment.id}}" class="replybtn">Reply</button>
+                            </span>
+                            <p>{{ comment.content }}</p>
+                          </div>
+                        </div>
+                      </li>
+                      {% endif %}
+                      {% for reply in comment.replies.all %}
+                      <li>
+                        <div class="comments-details">
+                          <div class="comments-list-img">
+                            <img src="{% static 'img/blog/b02.jpg' %}" alt="post-author">
+                          </div>
+                          <div class="comments-content-wrap">
+                            <span>
+																<b><a href="#">{{ reply.name }}</a></b>
+																child
+																<span class="post-time">{{ reply.created_at }} </span>
+                            <a href="#">Reply</a>
+                            </span>
+                            <p>{{ reply.content }}</p>
+                          </div>
+                        </div>
+                      </li>
+                      {% endfor %}
+                      {% endfor %}
+                    </ul>
+                  </div>
+                </div>
+                <div class="comment-respond">
+                  <h3 class="comment-reply-title">Leave a Reply </h3>
+                  <span class="email-notes">Your email address will not be published. Required fields are marked *</span>
+                  <form method="POST">
+                    {% csrf_token %}
+                    <input class="hidden-inp" type="hidden" name="id">
+                    <div class="row">
+                      <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                        <p>Name *</p>
+                        <input type="text" name="name"/>
+                      </div>
+                      <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                        <p>Email *</p>
+                        <input type="email" name="email"/>
+                      </div>
+                      <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                        <p>Website</p>
+                        <input type="text" name="website"/>
+                      </div>
+                      <div class="col-lg-12 col-md-12 col-sm-12 comment-form-comment">
+                        <p>Comment</p>
+                        <textarea id="message-box" cols="30" rows="10" name="comment"></textarea>
+                        <input type="submit" value="Post Comment" />
+                      </div>
+                    </div>
+                  </form>
+                </div>
+              </div>
+              <!-- single-blog end -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- End Blog Area -->
+  <div class="clearfix"></div>
+
+  <!-- Start Footer bottom Area -->
+  <footer>
+    <div class="footer-area">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-4 col-sm-4 col-xs-12">
+            <div class="footer-content">
+              <div class="footer-head">
+                <div class="footer-logo">
+                  <h2><span>e</span>Business</h2>
+                </div>
+
+                <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis.</p>
+                <div class="footer-icons">
+                  <ul>
+                    <li>
+                      <a href="#"><i class="fa fa-facebook"></i></a>
+                    </li>
+                    <li>
+                      <a href="#"><i class="fa fa-twitter"></i></a>
+                    </li>
+                    <li>
+                      <a href="#"><i class="fa fa-google"></i></a>
+                    </li>
+                    <li>
+                      <a href="#"><i class="fa fa-pinterest"></i></a>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- end single footer -->
+          <div class="col-md-4 col-sm-4 col-xs-12">
+            <div class="footer-content">
+              <div class="footer-head">
+                <h4>information</h4>
+                <p>
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.
+                </p>
+                <div class="footer-contacts">
+                  <p><span>Tel:</span> +123 456 789</p>
+                  <p><span>Email:</span> contact@example.com</p>
+                  <p><span>Working Hours:</span> 9am-5pm</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- end single footer -->
+          <div class="col-md-4 col-sm-4 col-xs-12">
+            <div class="footer-content">
+              <div class="footer-head">
+                <h4>Instagram</h4>
+                <div class="flicker-img">
+                  <a href="#"><img src="img/portfolio/1.jpg" alt=""></a>
+                  <a href="#"><img src="img/portfolio/2.jpg" alt=""></a>
+                  <a href="#"><img src="img/portfolio/3.jpg" alt=""></a>
+                  <a href="#"><img src="img/portfolio/4.jpg" alt=""></a>
+                  <a href="#"><img src="img/portfolio/5.jpg" alt=""></a>
+                  <a href="#"><img src="img/portfolio/6.jpg" alt=""></a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="footer-area-bottom">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="copyright text-center">
+              <p>
+                &copy; Copyright <strong>eBusiness</strong>. All Rights Reserved
+              </p>
+            </div>
+            <div class="credits">
+              Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <a href="#" class="back-to-top"><i class="fa fa-chevron-up"></i></a>
+{% endblock %}
